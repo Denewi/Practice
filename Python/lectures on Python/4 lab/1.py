@@ -1,6 +1,6 @@
 """Draw simple picture."""
 import pygame
-from pygame.draw import *
+from pygame.draw import rect, polygon, circle
 
 
 def main():
