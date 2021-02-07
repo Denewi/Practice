@@ -13,6 +13,7 @@ def main():
 
     pygame.display.update()  # update screen
 
+    # Main cycle
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
