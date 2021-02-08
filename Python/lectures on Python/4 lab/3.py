@@ -58,6 +58,7 @@ def draw_smiley(x, y, size):
 def draw_body(x, y, size):
     """Draw body smiley."""
     circle(screen, YELLOW, (x, y), size)
+    circle(screen, BLACK, (x, y), size, 1)
 
 
 def draw_eyes(x, y, size):
