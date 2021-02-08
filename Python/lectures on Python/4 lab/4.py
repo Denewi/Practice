@@ -3,6 +3,9 @@ import pygame
 from pygame.draw import rect, circle
 
 FPS = 30
+SKY_BLUE = (117, 210, 253)
+DEEP_BLUE = (0, 191, 255)
+YELLOW = (255, 215, 0)
 
 
 screen = pygame.display.set_mode((600, 400))
@@ -54,7 +57,17 @@ def main():
 
 def draw_fon(height, width):
     """Draw sky, water and earth."""
-    pass
+    height_sky = height / 2.5
+    rect(screen, SKY_BLUE, (0, 0, width, height_sky))
+
+    y_water = height_sky
+    height_water = (height - height_sky) // 2.5
+    rect(screen, DEEP_BLUE, (0, y_water, width, height_water))
+
+    y_earht = y_water + height_water
+    height_earth = height - height_sky - height_water
+    rect(screen, YELLOW, (0, y_earht, width, height_earth))
+
 
 
 def draw_cloud(x, y, size):
