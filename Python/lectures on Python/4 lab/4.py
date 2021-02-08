@@ -1,11 +1,14 @@
 """Draw picture beach."""
 import pygame
 from pygame.draw import rect, circle
+from random import randint
 
 FPS = 30
 SKY_BLUE = (117, 210, 253)
 DEEP_BLUE = (0, 191, 255)
 YELLOW = (255, 215, 0)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 
 screen = pygame.display.set_mode((600, 400))
@@ -22,8 +25,9 @@ def main():
 
     x_cloud = width // 4
     y_cloud = height // 8
-    size_cloud = 10
-    draw_cloud(x_cloud, y_cloud, size_cloud)
+    width_cloud = 100
+    height_cloud = width_cloud // 3
+    draw_cloud(x_cloud, y_cloud, width_cloud, height_cloud)
 
     x_sun = 7/8 * width
     y_sun = height // 7
@@ -69,13 +73,17 @@ def draw_fon(height, width):
     rect(screen, YELLOW, (0, y_earht, width, height_earth))
 
 
-
-def draw_cloud(x, y, size):
+def draw_cloud(x, y, width_cloud, height_cloud):
     """Draw cloud.
 
-    size show radius circle.
+    x, y show up left corner
+    size show width cloud.
     """
-    pass
+    for circle_ in range(15):
+        circle(screen, WHITE,
+            (randint(x + height_cloud//2, x + width_cloud - height_cloud//2),
+             randint(y + height_cloud//2, y + height_cloud - height_cloud//2)),
+             randint(height_cloud//3, height_cloud//2))
 
 
 def draw_sun(x, y, size):
