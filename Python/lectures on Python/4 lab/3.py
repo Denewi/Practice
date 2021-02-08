@@ -1,6 +1,6 @@
 """Draw evil smiley."""
 import pygame
-from pygame.draw import rect
+from pygame.draw import rect, line, circle
 
 
 FPS = 30
@@ -9,16 +9,18 @@ YELLOW = (255, 211, 0)
 RED = (255, 51, 51)
 BLACK = (255, 255, 255)
 
+screen = pygame.display.set_mode((600, 600))
+
 
 def main():
     """Start the main function."""
     pygame.init()
 
-    screen = pygame.display.set_mode((600, 600))
-
     size = 200
-    x = 0
-    y = 0
+    x = 300
+    y = 300
+
+    draw_smiley(x, y, size)
 
     pygame.display.update()
     clock = pygame.time.Clock()
@@ -29,8 +31,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 finished = True
-
-        draw_smiley(x, y, size)
 
     pygame.quit()
 
@@ -45,6 +45,7 @@ def draw_smiley(x, y, size):
 
 def draw_body(x, y, size):
     """Draw body smiley."""
+    circle(screen, YELLOW, (x, y), size)
 
 
 if __name__ == '__main__':
