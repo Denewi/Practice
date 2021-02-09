@@ -91,7 +91,7 @@ def draw_sun(x, y, size):
 
     size show radius sun.
     """
-    pass
+    circle(screen, YELLOW, (x, y), size)
 
 
 def draw_ship(x, y, width, height):
