@@ -1,6 +1,6 @@
 """Draw picture beach."""
 import pygame
-from pygame.draw import rect, circle, polygon
+from pygame.draw import rect, circle, polygon, line
 from random import randint
 
 FPS = 30
@@ -8,10 +8,10 @@ SKY_BLUE = (117, 210, 253)
 DEEP_BLUE = (0, 191, 255)
 YELLOW = (255, 215, 0)
 WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
+BLACK = (10, 10, 10)
 LIGHT_BROWN = (166, 64, 0)
 BROWN = (65, 25, 0)
-GREY = (81, 199, 209)  # 208
+GREY = (230, 230, 200)
 
 
 screen = pygame.display.set_mode((600, 400))
@@ -141,7 +141,6 @@ def draw_body_ship(x, y, width, height):
     y_start_circle = y + indent + radius_start
     circle(screen, WHITE, (x_start_circle, y_start_circle), radius_start)
     indent_inside = int(radius_start // 3)
-    print(indent_inside)
     circle(screen, BLACK, (x_start_circle, y_start_circle),
            radius_start, indent_inside)
 
@@ -150,8 +149,33 @@ def draw_mast_ship(x, y, width, height):
     """Draw mast ship.
 
     x, y show down point mast
+    width show size pillar and sail
     """
-    pass
+    y_mast = y - height
+    # Draw pillar
+    width_pillar = width // 10
+    line(screen, BLACK, [x, y],
+                        [x, y_mast], width_pillar)
+
+    # Draw sail
+    x_sail_start = x + width_pillar // 2
+    y_sail_start = y - height
+    x_sail_mid = x_sail_start + width // 4
+    y_sail_mid = y - height // 2
+    x_sail_end = x_sail_start + width - width_pillar
+    polygon(screen, GREY, ([x_sail_start, y_sail_start],
+                           [x_sail_mid, y_sail_mid],
+                           [x_sail_end, y_sail_mid]))
+    polygon(screen, BLACK, ([x_sail_start, y_sail_start],
+                            [x_sail_mid, y_sail_mid],
+                            [x_sail_end, y_sail_mid]), 1)
+
+    polygon(screen, GREY, ([x_sail_start, y],
+                           [x_sail_mid, y_sail_mid],
+                           [x_sail_end, y_sail_mid]))
+    polygon(screen, BLACK, ([x_sail_start, y],
+                            [x_sail_mid, y_sail_mid],
+                            [x_sail_end, y_sail_mid]), 1)
 
 
 def draw_umbrella(x, y, width, height):
