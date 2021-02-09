@@ -8,10 +8,11 @@ SKY_BLUE = (117, 210, 253)
 DEEP_BLUE = (0, 191, 255)
 YELLOW = (255, 215, 0)
 WHITE = (255, 255, 255)
-BLACK = (10, 10, 10)
+BLACK = (90, 90, 90)
 LIGHT_BROWN = (166, 64, 0)
 BROWN = (65, 25, 0)
 GREY = (230, 230, 200)
+RED = (230, 76, 0)
 
 
 screen = pygame.display.set_mode((600, 400))
@@ -43,10 +44,10 @@ def main():
     height_ship = width_ship // 1.75
     draw_ship(x_ship, y_ship, width_ship, height_ship)
 
-    x_umbrella = width // 4
-    y_umbrella = height // 10
-    width_umbrella = width // 4
-    height_umbrella = height // 3
+    x_umbrella = width // 6
+    y_umbrella = height // 2
+    height_umbrella = 150
+    width_umbrella = height_umbrella // 1.05
     draw_umbrella(x_umbrella, y_umbrella, width_umbrella, height_umbrella)
 
     pygame.display.update()
@@ -107,7 +108,8 @@ def draw_ship(x, y, width, height):
 
     width_mast_ship = width // 3
     height_mast_ship = height - height_body_ship
-    draw_mast_ship(x, y, width_mast_ship, height_mast_ship)
+    x_mast_ship = x - width // 5
+    draw_mast_ship(x_mast_ship, y, width_mast_ship, height_mast_ship)
 
 
 def draw_body_ship(x, y, width, height):
@@ -122,7 +124,7 @@ def draw_body_ship(x, y, width, height):
     circle(screen, BROWN, (x_end, y), radius_end, 1, draw_bottom_left=True)
 
     # Draw center ship
-    width_center = (width - radius_end) // 1.25
+    width_center = (width - radius_end) // 1.4
     rect(screen, LIGHT_BROWN, (x_end, y, width_center, height))
     rect(screen, BROWN, (x_end, y, width_center, height), 1)
 
@@ -136,7 +138,7 @@ def draw_body_ship(x, y, width, height):
                             [x_start, y_start]), 1)
     # Draw circle in start body
     radius_start = height // 4
-    indent = radius_start // 2
+    indent = radius_start // 1.5
     x_start_circle = x_start + indent + radius_start
     y_start_circle = y + indent + radius_start
     circle(screen, WHITE, (x_start_circle, y_start_circle), radius_start)
@@ -179,8 +181,28 @@ def draw_mast_ship(x, y, width, height):
 
 
 def draw_umbrella(x, y, width, height):
-    """Draw umdrella."""
-    pass
+    """Draw umdrella.
+
+    x, y show point center up stick
+    """
+    # Draw canopy
+    x_canopy_left = x - width // 2
+    x_canopy_right = x + width // 2
+    height_canopy = height // 5
+    y_canopy = y + height_canopy
+    polygon(screen, RED, ([x, y], [x_canopy_left, y_canopy],
+                          [x_canopy_right, y_canopy]))
+
+    # Draw line
+    step = int(width // 7)
+    for triangle in range(step, int(width), step):
+        polygon(screen, BLACK, ([x, y], [x_canopy_left, y_canopy],
+                                [x_canopy_left + triangle, y_canopy]), 1)
+
+    # Draw stick
+    width_stick = width // 15
+    x_stick = x - width_stick // 2
+    rect(screen, LIGHT_BROWN, (x_stick, y_canopy, width_stick, height))
 
 
 if __name__ == '__main__':
