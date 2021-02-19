@@ -25,12 +25,17 @@ class CurrencyConv(QtWidgets.QMainWindow):
     def converter(self):
         c = CurrencyConverter()
         input_currency = self.ui.input_currency.text()
-        input_amount = int(self.ui.input_amount.text())
+        input_amount = self.ui.input_amount.text()
         output_currency = self.ui.output_currency.text()
+        print(input_currency)
 
-        output_amount = round(c.convert(input_amount, '%s' % input_currency, '%s' % output_currency), 2)
+        if input_currency and input_amount and output_currency and \
+                input_amount.isdigit():
+            output_amount = round(c.convert(int(input_amount),
+                                  '%s' % input_currency,
+                                  '%s' % output_currency), 2)
 
-        self.ui.output_amount.setText(str(output_amount))
+            self.ui.output_amount.setText(str(output_amount))
 
 
 app = QtWidgets.QApplication([])
